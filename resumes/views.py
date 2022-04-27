@@ -9,8 +9,12 @@ def sign_up (request):
 
 
 def resume_edit (request):
-    return render(request,'index.html')
+    return render(request,'resume-edit.html')
 
 
 def resume_preview (request):
     return render(request,'preview.html')            
+
+
+def profile(request):
+    return render(request, 'profile.html')
