@@ -1,0 +1,57 @@
+erDiagram
+   USER ||--o{ RESUME : creates
+   USER ||--o{ USER_PROFILE : has
+  
+   USER {
+       int id PK
+       string email
+       string full_name
+       string password_hash
+   }
+ 
+   USER_PROFILE {
+       int id PK
+       int user_id FK
+       string father_name
+       string dob
+       string address
+       string contact_number
+       string contact_email
+   }
+  
+   RESUME {
+       int id PK
+       string summary
+       string skills
+       string references
+       int design_template FK
+   }
+ 
+   RESUME ||--o{ PROJECT : has
+ 
+   PROJECT {
+       int id PK
+       int resume_id FK
+       string title
+       string description
+       string order
+   }
+ 
+   RESUME ||--o{ EDUCATION : has
+ 
+   EDUCATION {
+       int id PK
+       int resume_id FK
+       string title
+       int year_passed
+       boolean is_complete
+       string institute_name
+   }
+ 
+ 
+   DESIGN_TEMPLATE {
+       int id PK
+       string name
+   }
+ 
+   DESIGN_TEMPLATE ||--|{ RESUME : uses
