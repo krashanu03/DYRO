@@ -8,6 +8,8 @@ urlpatterns = [
     path('sign-up/', views.sign_up, name="sign-up"),
     path('resume-edit/', views.resume_edit, name="resume-edit"),
     path('resume-preview/', views.resume_preview, name="resume-preview"), # Download link from here.
-    path('profile/', views.profile, name="profile")
+    path('profile/', views.profile, name="profile"),
+    path('edit-profile/', views.edit_profile, name="edit-profile"),
+    path('save-profile/', views.save_profile, name="save-profile"),
 
 ]

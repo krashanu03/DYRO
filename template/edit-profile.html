@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Update Your Personal Information:</h2>
+
+
+<form method="POST" action="/save-profile/">
+{% csrf_token %}
+
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <td>Username</td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td>Father's Name </td><td>
+                    <input name="form_father_name" type="text"  value="{{profile.father_name}}" />
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td><td><input name="form_email" type="text" value="{{profile.contact_email}}"/></td>
+            </tr>
+            <tr>
+                <td>Address</td><td><textarea name="form_address" type="text" >{{profile.address}}</textarea></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit" >Save</button>
+                </td>
+            </tr>        
+        </tbody>
+    </table>
+
+</form>
+
+{% endblock content %}
