@@ -30,6 +30,7 @@ class Project(models.Model):
 
 
 class Education(models.Model):
+    user = models.ForeignKey(User, related_name='educations', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)  
     institute = models.CharField(max_length=100)  
     year_passed = models.SmallIntegerField()
