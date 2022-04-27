@@ -31,6 +31,7 @@ erDiagram
  
    PROJECT {
        int id PK
+       int user_id FK
        int resume_id FK
        string title
        string description
@@ -41,6 +42,7 @@ erDiagram
  
    EDUCATION {
        int id PK
+       int user_id FK
        int resume_id FK
        string title
        int year_passed
