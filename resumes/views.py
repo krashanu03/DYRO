@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from resumes.models import UserProfile
-from resumes.models import Resume
 
 
 def login(request):
@@ -14,31 +13,11 @@ def sign_up(request):
 
 
 def resume_edit(request):
-    try:
-        resume = Resume.objects.get(user=request.user)
-    except:
-        resume = Resume(user=request.user)
-        resume.save()
-    return render(request, 'resume-edit.html', {'resume-edit': Resume})
+    return render(request, 'resume-edit.html')
 
 
 def resume_preview(request):
-    resume = Resume.objects.get(user=request.user)
-    return render(request, 'preview.html', {'preview': Resume})
-
-
-def save_resume(request):
-
-    resume = Resume.objects.get(user=request.user)
-    resume.summary = request.POST['form_summary']
-    resume.skills = request.POST['form_skills']
-    resume.references = request.POST['form_references']
-    resume.experience = request.POST['form_experience']
-    resume.education = request.POST['form_education']
-    resume.personal_details = request.POST['form_personal_details']
-    resume.save()
-
-    return HttpResponseRedirect(reverse('resume-edit'))
+    return render(request, 'preview.html')
 
 
 def profile(request):

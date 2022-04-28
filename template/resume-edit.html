@@ -1,11 +1,9 @@
-% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-
-
-{%csrf_token%}
 <h2>{{user.username}}</h2>
+{%csrf_token%}
         
     </div>
     <div class="mb-3">
