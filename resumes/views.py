@@ -1,7 +1,14 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from resumes.models import UserProfile
+from resumes.models import Resume, UserProfile
+
+
+from django.http import HttpResponse
+from django.template import Context
+from django.template.loader import get_template
+import datetime
+from xhtml2pdf import pisa 
 
 
 def login(request):
@@ -13,11 +20,19 @@ def sign_up(request):
 
 
 def resume_edit(request):
-    return render(request, 'resume-edit.html')
+    try:
+        resume = Resume.objects.get(user=request.user)
+    except:
+        resume = Resume(user=request.user)
+        resume.save()
+    
+    profile = UserProfile.objects.get(user=request.user)
+
+    return render(request, 'resume-edit.html', {'resume': resume, 'profile': profile})
 
 
 def resume_preview(request):
-    return render(request, 'preview.html')
+    return render(request, 'preview.html', {})
 
 
 def profile(request):
@@ -44,3 +59,31 @@ def save_profile(request):
     user_profile.save()
 
     return HttpResponseRedirect(reverse('profile'))
+
+
+
+def save_resume(request):
+    resume = Resume.objects.get(user=request.user)
+    resume.summary = request.POST['form_summary']
+    resume.skills = request.POST['form_skills']
+
+
+    resume.save()
+    
+    return HttpResponseRedirect(reverse('resume-preview'))
+
+
+def generate_PDF(request):
+    data = {'user':request.user}
+
+    template = get_template('profile.html')
+    html  = template.render(data)
+
+    file = open('resume.pdf', "w+b")
+    pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file,
+            encoding='utf-8')
+
+    file.seek(0)
+    pdf = file.read()
+    file.close()            
+    return HttpResponse(pdf, 'application/pdf')    

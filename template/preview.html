@@ -5,28 +5,37 @@
 <br></br>
 
 <h2>{{user.username}}</h2>
-<p>{{user.username}}@GMAIL.COM</p>
-<p>+91 8305278411</p>
+<p>{{user.profile.contact_email}}</p>
+<p>{{user.profile.contact_number}}</p>
 
 <h3 style="color:red;">Summary:</h3>
 <p>
-    DevOps Engineer with 5 month of hands-in Experience in architecting/ automating and optimizing 
-    mission critical deployment over large infrastructure. proficient with configuration management tools,
-    and in developing CI/CD pipelines.
-
+    {{user.resume.summary}}
 </p>
 
 <h3 style="color:red;">Skills:</h3>
-<p>knowledge of linux and scripting languages.</p>
-<p>proficiant with various development,testing and deployment tool -git,jenkins.</p>
-<p>Docker,Kubernetes,MYSQL.</p>
-<p>Good understanding of DevOps key concept like infrastructure as code (IAC).</p>
-<p>Experience in developing CI/CD pipelines.</p>
+<p>{{user.resume.skills}}</p>
 
 
 <h2 style="color:red;">Experience:</h2>
-<h3>Software Engineer</h3>
-<p><b>filed.com Present</b></p>
+-----------------------------------------
+<table class="table">
+
+{% for exp in user.experiences.all %}
+
+<tr>
+    <td>{{exp.job_title}}</td>
+    <td>{{exp.org_name}}</td>
+    <td>{{exp.role}}</td>
+</tr>
+<tr>    
+    <td colspan="3"><b>Responsebilities: </b>{{exp.responsebilities}}</td>
+</tr>
+
+{% endfor %}
+</table>
+
+-----------------------------------------
 
 
 <p>I am working as a software engineer, having expertise in end-to-end software development
@@ -40,12 +49,7 @@
     </h6>
 
 <h3 style="color:red;">Personal Details:</h3>
-<p>Full Name:  Krashanu yadav</p>
-<p>Father Name:  Jagdev Yadav</p>
-<p>Address: 108 chandana appartment near 56 new palasia indore</p>
-<p>DOB: 03/09/2002</p>
-<p>Email:krashanuy@gmial.com</p>
-<p>Contact: 8305278411</p>
+{% include 'profile_partial.html' %}
 
 
 {% endblock content %}

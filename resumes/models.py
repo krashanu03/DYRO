@@ -16,11 +16,21 @@ class DesignTemplate(models.Model):
     name = models.CharField(max_length=50)
 
 class Resume(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='resume', on_delete=models.CASCADE)
     summary = models.TextField(null=True, blank=True)
     skills = models.TextField(null=True, blank=True)
     references = models.TextField(null=True, blank=True)
-    template = models.ForeignKey(DesignTemplate, related_name='resumes', on_delete=models.CASCADE)
+    template_name = models.CharField(max_length=50, default='default') #models.ForeignKey(DesignTemplate, related_name='resumes', on_delete=models.CASCADE)
+
+
+class Experience(models.Model):
+    user = models.ForeignKey(User, related_name='experiences', on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=100)    
+    org_name = models.CharField(max_length=100)    
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    role = models.CharField(max_length=100)    
+    responsebilities = models.TextField(null=True, blank=True)
 
 
 class Project(models.Model):
