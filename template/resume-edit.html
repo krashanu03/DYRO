@@ -1,5 +1,49 @@
-{% extends 'base.html' %}
+% extends 'base.html' %}
 
 {% block content %}
-Edit your resume
-{% endblock content %}
+
+
+
+{%csrf_token%}
+<h2>{{user.username}}</h2>
+        
+    </div>
+    <div class="mb-3">
+        <label for="summary" class="form-label">summary</label>
+        <textarea type="summary" class="form-control" id="summary" aria-describedby=""></textarea>
+        </div>
+    
+    
+      <div class="mb-3">
+        <label for="skills" class="form-label">skills</label>
+        <textarea type="skills" class="form-control" id="skills" aria-describedby=""></textarea>
+        </div>
+
+   
+    <div class="mb-3">
+        <label for="references" class="form-label">references</label>
+        <textarea type="references" class="form-control" id="Adderss" aria-describedby=""></textarea>
+        </div>
+
+
+    <div class="mb-3">
+        <label for="experience" class="form-label">experience</label>
+        <textarea type="experience" class="form-control" id="experience" aria-describedby=""></textarea>
+        </div>
+
+        
+    <div class="mb-3">
+        <label for="education" class="form-label">education</label>
+        <textarea type="education" class="form-control" id="education" aria-describedby=""></textarea>
+        </div>
+
+    <div class="mb-3">
+        <label for="personal_details" class="form-label">personal_details</label>
+        <textarea type="personal_details" class="form-control" id="personal_details" aria-describedby=""></textarea>
+        </div>
+
+    <div>
+        <button type="submit" >Save</button>
+        </div>
+    
+    {% endblock content %}]
