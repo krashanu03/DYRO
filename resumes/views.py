@@ -11,6 +11,10 @@ import datetime
 from xhtml2pdf import pisa 
 
 
+def home(request):
+    return render(request, 'home.html')
+
+
 def login(request):
     return render(request, 'account/login.html')
 
@@ -32,6 +36,11 @@ def resume_edit(request):
 
 
 def resume_preview(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except:
+        return HttpResponseRedirect(reverse('edit-profile'))
+
     return render(request, 'preview.html', {})
 
 
@@ -46,7 +55,11 @@ def profile(request):
 
 
 def edit_profile(request):
-    user_profile = UserProfile.objects.get(user=request.user)
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except:
+        user_profile = UserProfile(user=request.user, contact_email=request.user.email)
+        user_profile.save()
     return render(request, 'edit-profile.html', {'profile': user_profile})
 
 
@@ -66,7 +79,7 @@ def save_resume(request):
     resume = Resume.objects.get(user=request.user)
     resume.summary = request.POST['form_summary']
     resume.skills = request.POST['form_skills']
-
+    resume.references = request.POST['form_references']
 
     resume.save()
     
@@ -76,7 +89,7 @@ def save_resume(request):
 def generate_PDF(request):
     data = {'user':request.user}
 
-    template = get_template('profile.html')
+    template = get_template('resume_template/%s.html' % request.user.resume.template_name)
     html  = template.render(data)
 
     file = open('resume.pdf', "w+b")

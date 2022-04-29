@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Python Guides</title>
+    <style>
+        @page  {
+          margin: 40;
+          size: letter; /*or width x height 150mm 50mm*/
+        }
+    </style>
+</head>
+<body style="font-size:medium">
+
+    <div class="mb-3">
+        <h1>{{user.get_full_name}}</h1>
+    </div>
+    <div class="mb-0">
+        <h6>Email ID: {{user.profile.contact_email}}</h6>
+    </div>
+    <div class="mb-0">
+        <h6>Mobile: {{user.profile.contact_number}}</h6>
+    </div>
+    <hr>
+
+    <div class="mb-3">
+        <label for="education" class="form-label"><h4>Career Objective</h4></label>
+        <div>{{user.resume.objective}}</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="education" class="form-label"><h4>Summary</h4></label>
+        <div>{{user.resume.summary}}</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="education" class="form-label"><h4>Skills</h4></label>
+        <div>{{user.resume.skills}}</div>
+    </div>
+
+    
+    <div class="mb-3">
+        <label for="education" class="form-label"><h4>Education</h4></label>
+        <table class="table">
+            {% for edu in user.educations.all %}
+            <tr>
+                <td>{{edu.title}}</td>
+                <td>{{edu.institute}}</td>
+                <td>{{edu.year_passed}}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>            
+    </div>
+
+    <h4>Experiences:</h4>
+    <table class="table">
+
+    {% for exp in user.experiences.all %}
+    <tr>
+        <td>{{exp.job_title}}</td>
+        <td>{{exp.org_name}}</td>
+        <td>{{exp.role}}</td>
+    </tr>
+    <tr>    
+        <td colspan="3"><b>Responsebilities: </b>{{exp.responsebilities}}</td>
+    </tr>
+    
+    {% endfor %}
+    </table>
+
+    <h4>Projects:</h4>
+    <table class="table">
+
+    {% for prj in user.projects.all %}
+    <tr>
+        <td>{{prj.title}}</td>
+    </tr>
+    <tr>    
+        <td colspan="1"><b>Description: </b>{{prj.description}}</td>
+    </tr>
+    
+    {% endfor %}
+    </table>
+
+
+    <div class="mb-3">
+        <label for="education" class="form-label"><h4>References:</h4></label>
+        <div>{{user.resume.references}}</div>
+    </div>
+
+
+    <div class="mb-3" style="page-break-before:auto">
+        <label for="personal_details" class="form-label"><h4>Personal Details</h4></label>
+        {% include 'personal_details.html' with profile=user.profile %}
+    </div>        
+    
+</body>
+</html>

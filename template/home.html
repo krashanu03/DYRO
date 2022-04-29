@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Design, Your Resume Online!</h1>
+    <p class="lead">Get the nice and impactful resume in just few clicks.</p>
+    <hr class="my-4">
+    <p>We present you easy to use forms to enter your information and generate a nice looking resume.</p>
+
+    {% if user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="/resume-preview/" role="button">Preview!</a>
+    {% else %}
+    <a class="btn btn-primary btn-lg" href="/accounts/signup/" role="button">Sign Up Now!</a>
+    {% endif %}
+  </div>
+
+{% endblock content %}

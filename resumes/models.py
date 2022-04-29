@@ -45,3 +45,6 @@ class Education(models.Model):
     institute = models.CharField(max_length=100)  
     year_passed = models.SmallIntegerField()
     is_complete = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('-year_passed',)

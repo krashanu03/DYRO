@@ -2,52 +2,87 @@
 
 {% block content %}
 
-<h2>{{user.username}}</h2>
-
-
 <form method="POST" action="/save-resume/">
-
 {%csrf_token%}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="summary" class="form-label"><h3>Summary</h3></label>
+                <textarea type="summary" class="form-control" id="summary" aria-describedby="" name="form_summary">{{resume.summary}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label"><h3>Skills</h3></label>
+                <textarea type="skills" class="form-control" id="skills" aria-describedby="" name="form_skills">{{resume.skills}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="references" class="form-label"><h3>References</h3></label>
+                <textarea type="references" class="form-control" id="Adderss" aria-describedby="" name="form_references">{{resume.references}}</textarea>
+            </div>            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" >Save</button>
+            </div>            
         
+            <div class="mb-3">
+                <label for="personal_details" class="form-label"><h3>Personal Details</h3></label>
+                {% include 'profile_partial.html' %}
+            </div>      
+
+        </div>
+
+        <div class="col-md-6">
+                
+            <div class="mb-3">
+                <label for="experience" class="form-label"><h3>Experience</h3></label>
+                <table class="table">
+                {% for exp in user.experiences.all %}
+                <tr>
+                    <td>{{exp.job_title}}</td>
+                    <td>{{exp.org_name}}</td>
+                    <td>{{exp.role}}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        
+                
+            <div class="mb-3">
+                <label for="education" class="form-label"><h3>Education</h3></label>
+                <table class="table">
+                    {% for edu in user.educations.all %}
+                    <tr>
+                        <td>{{edu.title}}</td>
+                        <td>{{edu.institute}}</td>
+                        <td>{{edu.year_passed}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>            
+            <div class="mb-3">
+                <h4>Projects:</h4>
+                <table class="table">
+
+                {% for prj in user.projects.all %}
+                <tr>
+                    <td>{{prj.title}}</td>
+                </tr>
+                <tr>    
+                    <td colspan="1"><b>Description: </b>{{prj.description}}</td>
+                </tr>
+                
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+
     </div>
-    <div class="mb-3">
-        <label for="summary" class="form-label">summary</label>
-        <textarea type="summary" class="form-control" id="summary" aria-describedby="" name="form_summary">{{resume.summary}}</textarea>
-        </div>
+
+
+
+
+
     
-    
-      <div class="mb-3">
-        <label for="skills" class="form-label">skills</label>
-        <textarea type="skills" class="form-control" id="skills" aria-describedby="" name="form_skills">{{resume.skills}}</textarea>
-        </div>
-
-   
-    <div class="mb-3">
-        <label for="references" class="form-label">references</label>
-        <textarea type="references" class="form-control" id="Adderss" aria-describedby="" name="form_references">{{resume.references}}</textarea>
-        </div>
-
-
-    <div class="mb-3">
-        <label for="experience" class="form-label">experience</label>
-        
-        </div>
-
-        
-    <div class="mb-3">
-        <label for="education" class="form-label">education</label>
-
-        </div>
-
-    <div class="mb-3">
-        <label for="personal_details" class="form-label">personal_details</label>
-        {% include 'profile_partial.html' %}
-        </div>
-
-    <div>
-        <button type="submit" >Save</button>
-        </div>
-
     </form>        
     
     {% endblock content %}]

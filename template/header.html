@@ -1,30 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1c2331;">
     <a class="navbar-brand" href="/">DYRO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav navbar-left">
-        <li class="nav-item">
-          <a class="nav-link" href="/">Preview</a>
-        </li>
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="/resume-edit/">Edit Resume</a>
+          <a class="nav-link" href="/resume-preview/">Preview</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/resume-pdf/">Download PDF</a>
+          <a class="nav-link" href="/resume-edit/">Edit</a>
         </li>
-        
         <li class="nav-item">
-          <a class="nav-link" href="/accounts/logout/">Logout</a>
+          <a class="nav-link" href="/resume-pdf/">Download</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="/profile/">Profile</a>
+        </li>        
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/logout/">Logout</a>
         </li>
         {% else %}
         <li class="nav-item">
@@ -37,4 +36,6 @@
       </ul>
 
     </div>
+
   </nav>
+  
